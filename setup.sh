@@ -6,14 +6,14 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2020/01/19 16:30:48 by fgalaup      #+#   ##    ##    #+#        #
-#    Updated: 2020/02/05 15:06:11 by fgalaup     ###    #+. /#+    ###.fr      #
+#    Updated: 2020/02/06 10:04:41 by fgalaup     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 #!/bin/sh
 
-# ================================= SETUP ==================================== #
+# ================================== SETUP =================================== #
 
 # Check if dependency is installed and install.
 # Brew
@@ -23,7 +23,7 @@ then
     curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
 fi
 
-# Docker
+# Docker (Devloppment Only)
 if ! which docker >/dev/null 2>&1
 then
     # Install Docker
@@ -37,4 +37,23 @@ then
     brew install minikube
 fi
 
-# ================================== RUN ===================================== #
+# =============================== RUN MINIKUBE =============================== #
+
+# Check if minikube is 
+if ! minikube status >/dev/null 2>&1
+then
+    echo "Start Minikube ..."
+    if ! minikube start --vm-driver=virtualbox \
+        --cpus 3 --disk-size=30000mb --memory=3000mb # \
+        # --bootstrapper=kubeadm # allow telegraf to query metrics
+    then
+        echo "Cannot start minikube!"
+        exit 1
+    fi
+
+    # Make search to enable
+    # minikube addons enable metrics-server
+    # minikube addons enable ingress
+fi
+
+# ================================== DEPLOY ================================== #
