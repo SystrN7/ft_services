@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 11:45:34 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/17 14:58:27 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/17 15:03:38 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,4 +31,4 @@ minikube ip
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null admin@192.168.99.102 -p 220
 
 # Revoke old key
-ssh-keygen -R 192.168.99.102 
+ssh-keygen -R 192.168.99.102

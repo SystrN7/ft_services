@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/17 14:36:48 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/23 14:17:56 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ FROM alpine:latest
 EXPOSE 443 80 22
 
 # Install Nginx
-RUN apk add --update nginx && \
-    apk add --update openssh && \
+RUN apk update && \
+	apk add nginx && \
+    apk add openssh && \
 	rm -f /var/cache/apk/*
     # apk cache clean
 
@@ -44,6 +45,4 @@ COPY Application/* /Application/www
 # Copy entrypoint
 COPY Entrypoint.sh /Entrypoint.sh
 
-ENTRYPOINT [ "sh", "Entrypoint.sh" ]
-# Unusable beacause i need to start ssh services befor
-# CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
