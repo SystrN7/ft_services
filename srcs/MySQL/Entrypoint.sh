@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:23:52 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/23 11:38:24 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/23 11:49:46 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 [ -z "$MYSQL_ROOT_NAME" ] && MYSQL_ROOT_NAME=root
 [ -z "$MYSQL_ROOT_PASSWORD" ] && MYSQL_ROOT_PASSWORD=root
 
+# Creating flolder to runing mysql deamon
 if [ ! -d /run/mysqld ]
 then
 	mkdir -p /run/mysqld
@@ -26,7 +27,7 @@ then
 	mysql_install_db --datadir="${MYSQL_DATA_PATH}" --user="${MYSQL_ROOT_NAME}" > /dev/null
 fi
 
-# Creating root user for remote access to the database.
+# Creating root user for remote access to the databases.
 echo "FLUSH PRIVILEGES;" > /tmps
 echo "CREATE USER '$MYSQL_ROOT_NAME'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" >> /tmps
 echo "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_ROOT_NAME'@'%' WITH GRANT OPTION;" >> /tmps

@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 10:35:18 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/19 16:30:45 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/23 11:49:48 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,21 +22,12 @@ VOLUME [ "/Application/MySQL/DataBases", "/Application/MySQL/Log" ]
 # Install MySQL
 RUN apk update && \
 	apk add mysql && \
-    apk add mysql-client && \
     rm -f /var/cache/apk/*
-
-# Configure MySQL
-# COPY Config/my.cnf /etc/mysql/my.cnf
 
 # RUN mkdir /Application && \
 # 	mkdir /Application/MySQL && \
 # 	mkdir /Application/MySQL/DataBases && \
 # 	mkdir /Application/MySQL/Log
-
-# # Configure mysql User
-# COPY Setup.sh /
-# RUN sh Setup.sh
-
 
 # Copy entrypoint
 COPY Entrypoint.sh /Entrypoint.sh
