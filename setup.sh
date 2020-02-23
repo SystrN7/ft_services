@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/17 11:46:45 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/17 15:29:33 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,3 +64,6 @@ fi
 eval $(minikube docker-env)
 
 # Build docker image
+
+docker image build --tag services_nginx:1.0 ./srcs/Nginx
+docker image build --tag services_mysql:1.0 ./srcs/MySQL
