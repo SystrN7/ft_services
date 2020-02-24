@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/23 14:17:56 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/24 18:00:18 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,10 @@ FROM alpine:latest
 
 # Exposed port
 EXPOSE 443 80 22
+# USER www:www
+
+# Creating Nginx User
+RUN adduser -DH -g 'www' www
 
 # Install Nginx
 RUN apk update && \
@@ -30,7 +34,9 @@ RUN ssh-keygen -A
 # Make Application Directory
 RUN mkdir /Application && \
 	mkdir /Application/Certs && \
-	mkdir /Application/www
+	mkdir /Application/www && \
+	chown -R www:www /var/lib/nginx && \
+	chown -R www:www /Application
 
 # Configure Nginx
 COPY Config/nginx.conf /etc/nginx/
@@ -41,6 +47,7 @@ COPY Config/Certs/tls.key /Application/Certs/
 
 # Setup site files
 COPY Application/* /Application/www
+
 
 # Copy entrypoint
 COPY Entrypoint.sh /Entrypoint.sh
