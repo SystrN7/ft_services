@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 10:35:18 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/23 11:49:48 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/23 14:42:41 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,5 +31,5 @@ RUN apk update && \
 
 # Copy entrypoint
 COPY Entrypoint.sh /Entrypoint.sh
+
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
-# CMD ["/usr/bin/mysqld", "--user=root", "--console"]
