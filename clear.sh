@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 15:19:43 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/26 16:51:46 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/08 10:09:55 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ kubectl delete service ssh-service
 kubectl delete ingress ingress-redirect
 
 
-if [ "$1" = "--minikube" ]
+if [ "$1" = "--minikube" ] || [ "$1" = "--all" ]
 then
 # Stop minikube
 sh ./stop.sh
