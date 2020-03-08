@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 11:45:34 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/24 17:53:12 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/26 11:06:55 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ docker container rm phpmyadmin
 # Docker run image
 docker container run -d \
 	 --name phpmyadmin \
-	 -e PMA_HOST=192.168.99.102 \
+	 -e PMA_HOST=192.168.99.100 \
 	 -e PMA_PMADB=phpmyadmin \
 	 -e PMA_PORT=3306 \
 	 -e PMA_USER=root \

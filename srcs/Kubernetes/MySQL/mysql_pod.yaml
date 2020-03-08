@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: mysql-pod
+    labels:
+      project: ft_services
+      app: mysql
+spec:
+    containers:
+    - name: mysql
+      ports:
+      - containerPort: 3306
+        hostPort: 3306
+      image: ft_mysql:1.0

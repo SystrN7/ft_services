@@ -6,13 +6,12 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/24 17:50:29 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/02/26 13:27:51 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-
-# Use the last version of alpine linux
-FROM services_nginx:1.0
+# Use Nginx servers
+FROM ft_nginx:1.0
 
 # Exposed port
 EXPOSE 80
