@@ -6,9 +6,11 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/23 14:43:30 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/24 18:21:26 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/08 17:37:33 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
+
+#!bin/sh
 
 export PHP_FPM_USER="www"
 export PHP_FPM_GROUP="www"
@@ -16,16 +18,21 @@ export PHP_DISPLAY_ERRORS="On"
 export PHP_DISPLAY_STARTUP_ERRORS="On"
 export PHP_ERROR_REPORTING="E_COMPILE_ERROR\|E_RECOVERABLE_ERROR\|E_ERROR\|E_CORE_ERROR"
 
+# Set default user value
+[ -z "$PMA_PORT" ] && PMA_PORT=3306
+[ -z "$PMA_PMADB" ] && PMA_PMADB=phpmyadmin
+
 # Start PHP FPM
-/usr/sbin/php-fpm7 -d clear_env=no
+/usr/sbin/php-fpm7
 
 # Install PHPMyAdmin Database
-if [ -z "$PMA_PMADB" ] && [ -z "$PMA_HOST" ] && [ -z "$PMA_USER" ] ;
+if [  -n "$PMA_HOST" ] && [ -n "$PMA_USER" ] ;
 then
-	if [[ -z "`mysql -qfsBe "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='$PMA_PMADB'"`" ]];
+	if [[ -z "`mysql --host=${PMA_HOST} --port=${PMA_PORT} --user=${PMA_USER} --password=${PMA_PASSWORD} -qfsBe "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='$PMA_PMADB'"`" ]];
 	then
-		mysql --host=${PMA_HOST} --user=${PMA_USER} --password=${PMA_PASSWORD} -e "CREATE DATABASE $PMA_PMADB;"
-		mysql --host=${PMA_HOST} --user=${PMA_USER} --password=${PMA_PASSWORD} ${PMA_PMADB} < /Application/PHPMyAdmin/sql/create_tables.sql
+		echo "Setup Database"
+		mysql --host=${PMA_HOST} --port=${PMA_PORT} --user=${PMA_USER} --password=${PMA_PASSWORD} -e "CREATE DATABASE $PMA_PMADB;"
+		mysql --host=${PMA_HOST} --port=${PMA_PORT} --user=${PMA_USER} --password=${PMA_PASSWORD} ${PMA_PMADB} < /Application/PHPMyAdmin/sql/create_tables.sql
 	fi
 fi
 
