@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 11:45:34 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/26 11:06:55 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/08 11:00:29 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 eval $(minikube docker-env);
 
 # Creating docker image
-docker image build --tag services_phpmyadmin:1.0 .
+docker image build --tag ft_phpmyadmin:1.0 .
 
 # Remove previous container
 docker stop phpmyadmin
@@ -30,7 +30,14 @@ docker container run -d \
 	 -e PMA_USER=root \
 	 -e PMA_PASSWORD=root \
 	 -p 5000:80 \
-	services_phpmyadmin:1.0
+	ft_phpmyadmin:1.0
 
+# Show log after app start (to show error)
 sleep 5;
 docker logs phpmyadmin
+
+# [i] Test Procedure
+# To login use command to get ip of Vitual Machine
+# minikube ip
+# And login with port
+# 5350 # Http
