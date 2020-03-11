@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 13:52:48 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/11 14:46:48 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,6 @@ RUN apk update && \
 	php7-ctype \ 
 	mysql-client
 
-# Creating applicaton directory
-# RUN mkdir /Application/Wordpress
-
 # Setup Wordpress Files
 RUN wget https://wordpress.org/wordpress-5.3.2.tar.gz && \
 	tar zxf wordpress-5.3.2.tar.gz && \
@@ -69,9 +66,6 @@ COPY Config/nginx.conf /etc/nginx/nginx.conf
 RUN sed -i 's/user = nobody/user = www/g' etc/php7/php-fpm.d/www.conf && \
 	sed -i 's/group = nobody/group = www/g' etc/php7/php-fpm.d/www.conf && \
 	sed -i 's/;clear_env = no/clear_env = no/g ' etc/php7/php-fpm.d/www.conf
-
-# Configure Wordpress
-# COPY Config/wp-config.php /Application/Wordpress/wp-config.php
 
 # Install WordPress CLI
 # - 1 : Download Wordpress CLI.

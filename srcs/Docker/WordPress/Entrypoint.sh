@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 14:43:38 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/11 14:47:42 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,9 @@
 [ -z "$WORDPRESS_ADMIN_PASSWORD" ] && WORDPRESS_ADMIN_PASSWORD=admin
 
 
-# $WORDPRESS_SITE_NAME
-# $WORDPRESS_SITE_URL
-
 # Creating configuration file and database
 if [  -n "$WORDPRESS_DATABASE_HOST" ] && [ -n "$WORDPRESS_DATABASE_USER" ] && [ -n "$WORDPRESS_DATABASE_PASSWORD" ] ;
 then
-	echo "Debug" ;
 	# Creating config file if doesn't exit.
 	if [ ! -f /Application/Wordpress/wp-config.php ] ;
 	then
@@ -82,7 +78,6 @@ then
 			--admin_user="$WORDPRESS_ADMIN_NAME" \
 			--admin_password="$WORDPRESS_ADMIN_PASSWORD"
 		wp option update siteurl "$WORDPRESS_SITE_URL" --path=Application/Wordpress 
-		# wp wp db create --path=Application/Wordpress 
 	fi
 fi
 
