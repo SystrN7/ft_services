@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 15:10:39 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/11 15:19:47 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@
 [ -z "$WORDPRESS_ADMIN_EMAIL" ] && WORDPRESS_ADMIN_EMAIL=admin@wordpress.com
 [ -z "$WORDPRESS_ADMIN_NAME" ] && WORDPRESS_ADMIN_NAME=admin
 [ -z "$WORDPRESS_ADMIN_PASSWORD" ] && WORDPRESS_ADMIN_PASSWORD=admin
+
+[ -z "$WORDPRESS_USER_RANDOM" ] && WORDPRESS_USER_RANDOM=0
 
 
 # Creating configuration file and database
@@ -85,6 +87,13 @@ then
 	then
 		echo "Importing Users" ;
 		wp user import-csv --path=Application/Wordpress --skip-update /Application/Users.csv
+	fi
+
+	# Creating Random Users
+	if [ "$WORDPRESS_USER_RANDOM" -ge 1 ] ;
+	then
+		echo "Generating Users" ;
+		wp user generate --path=Application/Wordpress --count=$WORDPRESS_USER_RANDOM
 	fi
 fi
 

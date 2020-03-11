@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 11:45:34 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 09:39:51 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/11 15:22:30 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ docker container run -d \
 	 -e WORDPRESS_DATABASE_NAME=wordpress \
 	 -e WORDPRESS_DATABASE_USER=root \
 	 -e WORDPRESS_DATABASE_PASSWORD=root \
+	 -e WORDPRESS_USER_IMPORT_CSV=true \
+	 -e WORDPRESS_USER_RANDOM=25 \
 	 -p 4050:80 \
 	ft_wordpress:1.0
 
