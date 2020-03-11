@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 14:46:48 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/11 14:59:54 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,8 @@ RUN sed -i 's/user = nobody/user = www/g' etc/php7/php-fpm.d/www.conf && \
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	mv wp-cli.phar /bin/wp && \
 	chmod +x /bin/wp
+
+COPY Config/User.csv /Application/Users.csv
 	
 # Copy entrypoint
 COPY Entrypoint.sh /Entrypoint.sh

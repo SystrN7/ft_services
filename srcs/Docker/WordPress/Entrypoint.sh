@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 14:47:42 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/11 15:10:39 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@
 # $WORDPRESS_ADMIN_NAME
 # $WORDPRESS_ADMIN_PASSWORD
 
+# WORDPRESS_USER_IMPORT_CSV
 # WORDPRESS_USER_RANDOM
-# WORDPRESS_USER_IMPORT_CVS
 
 # Set default value
 [ -z "$WORDPRESS_SITE_URL" ] && WORDPRESS_SITE_URL=http://192.168.99.100:4050/ # TODO : Find beater way to get default url
@@ -78,6 +78,13 @@ then
 			--admin_user="$WORDPRESS_ADMIN_NAME" \
 			--admin_password="$WORDPRESS_ADMIN_PASSWORD"
 		wp option update siteurl "$WORDPRESS_SITE_URL" --path=Application/Wordpress 
+	fi
+
+	# Import Users via csv
+	if [ -f /Application/Users.csv ] && [ "$WORDPRESS_USER_IMPORT_CSV"  == "true" ] ;
+	then
+		echo "Importing Users" ;
+		wp user import-csv --path=Application/Wordpress --skip-update /Application/Users.csv
 	fi
 fi
 
