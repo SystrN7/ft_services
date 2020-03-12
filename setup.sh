@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/26 15:03:31 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/12 10:10:52 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ eval $(minikube docker-env)
 docker image build --tag ft_nginx:1.0 ./srcs//Docker/Nginx
 docker image build --tag ft_mysql:1.0 ./srcs/Docker/MySQL
 docker image build --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
+docker image build --tag ft_wordpress:1.0 ./srcs/Docker/Wordpress/
 
 # Deploy with kubernetes
 
