@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/24 18:00:18 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/12 14:01:36 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,9 @@ RUN adduser -DH -g 'www' www
 
 # Install Nginx
 RUN apk update && \
+	apk add --no-cache \
 	apk add nginx && \
     apk add openssh && \
-	rm -f /var/cache/apk/*
-    # apk cache clean
 
 # Generate SSH key
 RUN ssh-keygen -A
@@ -42,6 +41,7 @@ RUN mkdir /Application && \
 COPY Config/nginx.conf /etc/nginx/
 
 # Setup SSL Certificate
+# ! : NEED TO BE DEPRECETED !
 COPY Config/Certs/tls.crt /Application/Certs/
 COPY Config/Certs/tls.key /Application/Certs/
 
