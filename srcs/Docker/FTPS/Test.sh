@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/12 10:09:42 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/12 10:12:45 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/16 10:11:08 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,3 +32,8 @@ sleep 5;
 docker logs ftps
 
 # [i] Test Procedure
+# Use FileZilla FTP Client
+# In top bar put minikube ip
+# user = admin
+# password = admin
+# Port = 21
