@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/12 10:10:52 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/05/12 09:50:41 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ if ! minikube status > /dev/null 2>&1
 then
     echo "Start Minikube ..."
     if ! minikube start --vm-driver=virtualbox \
-        --cpus 3 --disk-size=30000mb --memory=3000mb
+        --cpus 2 --disk-size=30000mb --memory=4000mb
         # \
         # --bootstrapper=kubeadm # allow telegraf to query metrics
         # -p ft_services # add name
