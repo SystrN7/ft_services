@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 10:35:18 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/23 14:42:41 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/05/12 10:22:52 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ VOLUME [ "/Application/MySQL/DataBases", "/Application/MySQL/Log" ]
 
 # Install MySQL
 RUN apk update && \
-	apk add mysql && \
-    rm -f /var/cache/apk/*
+	apk add --no-cache \
+	mysql
 
 # RUN mkdir /Application && \
 # 	mkdir /Application/MySQL && \
