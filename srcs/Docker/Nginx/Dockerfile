@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/12 14:01:36 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/03/16 14:05:25 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ RUN adduser -DH -g 'www' www
 # Install Nginx
 RUN apk update && \
 	apk add --no-cache \
-	apk add nginx && \
-    apk add openssh && \
+	nginx \
+	openssh
 
 # Generate SSH key
 RUN ssh-keygen -A
