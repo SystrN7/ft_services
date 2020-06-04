@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    setup.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/05/12 09:50:41 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/05/14 18:50:24 by user42           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,27 +16,18 @@
 # ================================== SETUP =================================== #
 
 # Check if dependency is installed and install.
-# Brew
-if ! which brew > /dev/null 2>&1
-then
-    # Install Brew
-    curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
-    zsh setup.sh
-    exit 0; # Exit terminal
-fi
-
 # Docker
 if ! which docker > /dev/null 2>&1
 then
     # Install Docker
-    brew install docker
+    sudo apt install docker
 fi
 
 # Minikube
 if ! which minikube > /dev/null 2>&1
 then
     # Install Minikube
-    brew install minikube
+    sudo apt install minikube
 fi
 
 # =============================== RUN MINIKUBE =============================== #
@@ -46,7 +37,7 @@ if ! minikube status > /dev/null 2>&1
 then
     echo "Start Minikube ..."
     if ! minikube start --vm-driver=virtualbox \
-        --cpus 2 --disk-size=30000mb --memory=4000mb
+        --cpus 8 --disk-size=30000mb --memory=8000mb
         # \
         # --bootstrapper=kubeadm # allow telegraf to query metrics
         # -p ft_services # add name
