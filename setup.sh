@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    setup.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/05/14 18:50:24 by user42           ###   ########lyon.fr    #
+#    Updated: 2020/06/05 15:44:06 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ if ! minikube status > /dev/null 2>&1
 then
     echo "Start Minikube ..."
     if ! minikube start --vm-driver=virtualbox \
-        --cpus 8 --disk-size=30000mb --memory=8000mb
+        --cpus 4 --disk-size=30000mb --memory=4000mb
         # \
         # --bootstrapper=kubeadm # allow telegraf to query metrics
         # -p ft_services # add name
@@ -58,10 +58,10 @@ eval $(minikube docker-env)
 
 # Build docker image
 
-docker image build --tag ft_nginx:1.0 ./srcs//Docker/Nginx
-docker image build --tag ft_mysql:1.0 ./srcs/Docker/MySQL
-docker image build --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
-docker image build --tag ft_wordpress:1.0 ./srcs/Docker/Wordpress/
+docker image build --no-cache=true --tag ft_nginx:1.0 ./srcs//Docker/Nginx
+docker image build --no-cache=true --tag ft_mysql:1.0 ./srcs/Docker/MySQL
+docker image build --no-cache=true --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
+docker image build --no-cache=true --tag ft_wordpress:1.0 ./srcs/Docker/Wordpress/
 
 # Deploy with kubernetes
 
