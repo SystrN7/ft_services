@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/16 09:56:16 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/16 11:15:16 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/06/16 15:32:22 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ VOLUME /var/lib/influxdb
 
 # Install InfluxDB
 RUN apk update && \
-	apk add influxdb && \
-    rm -f /var/cache/apk/*
+	apk add --no-cache \
+	influxdb
 
 # Copy IfluxDB config
 COPY Config/influxdb.conf /etc/influxdb/influxdb.conf
