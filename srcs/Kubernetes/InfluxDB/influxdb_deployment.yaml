@@ -1,0 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    influxdb_deployment.yaml                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/20 20:52:07 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/20 20:56:54 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+  labels:
+    app: ft_services
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ft_services
+      tier: influxdb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ft_services
+        tier: influxdb
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: influxdb
+        image: ft_influxdb:1.0
+
+        ports:
+        - containerPort: 8086
+          name: influxdb

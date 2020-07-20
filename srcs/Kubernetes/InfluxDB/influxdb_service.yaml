@@ -1,0 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    influxdb_service.yaml                              :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/20 20:45:35 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/20 20:48:18 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: v1
+kind: Service
+metadata:
+    name: influxdb-service
+    labels:
+      app: ft_services
+
+spec:
+  selector:
+    app: ft_services
+    tier: influxdb
+  type: NodePort
+  ports:
+  - port: 8086
+    name: influxdb
