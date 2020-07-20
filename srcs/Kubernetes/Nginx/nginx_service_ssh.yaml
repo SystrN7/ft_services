@@ -6,20 +6,25 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:15 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/16 15:57:16 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/06/18 11:13:26 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
+# Header
 apiVersion: v1
 kind: Service
 metadata:
     name: ssh-service
+    labels:
+      app: ft_services
+
 spec:
   selector:
-    app: nginx
+    app: ft_services
+    tier: nginx
   type: NodePort
   ports:
   - port: 22
     targetPort: 22
-    nodePort: 30022
+    nodePort: 30000
     name: ssh

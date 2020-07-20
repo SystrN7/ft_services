@@ -1,0 +1,56 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    nginx_deployment.yaml                              :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/16 15:57:11 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/17 19:04:20 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: ft_services
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ft_services
+      tier: nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ft_services
+        tier: nginx
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: nginx
+        image: ft_nginx:1.0
+        ports:
+        - containerPort: 443
+          name: https
+        - containerPort: 80
+          name: http
+        - containerPort: 22
+          name: ssh
+        env:
+        - name: SSH_USER
+          valueFrom:
+            secretKeyRef:
+              name: ssh-user
+              key: username
+        - name: SSH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ssh-user
+              key: password
