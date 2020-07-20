@@ -1,0 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    graphana_services.yaml                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/07/20 11:10:33 by fgalaup           #+#    #+#              #
+#    Updated: 2020/07/20 11:17:01 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: v1
+kind: Service
+metadata:
+    name: graphana-service
+    labels:
+      app: ft_services
+
+spec:
+  selector:
+    app: ft_services
+    tier: graphana
+  type: NodePort
+  ports:
+  - port: 3000
+    name: graphana

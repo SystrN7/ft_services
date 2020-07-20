@@ -1,0 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    graphana_deployment.yaml                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/07/20 11:17:39 by fgalaup           #+#    #+#              #
+#    Updated: 2020/07/20 11:18:18 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphana
+  labels:
+    app: ft_services
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ft_services
+      tier: graphana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ft_services
+        tier: graphana
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: graphana
+        image: ft_graphana:1.0
+
+        ports:
+        - containerPort: 3000
+          name: graphana
