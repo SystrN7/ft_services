@@ -6,20 +6,22 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:26 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/16 15:57:27 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/06/19 09:45:50 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
+# Header
 apiVersion: v1
 kind: Service
 metadata:
-    project: ft_services
-    name: mysql-service
+  name: mysql
+  labels:
+    app: ft_services
+
 spec:
   selector:
-    project: ft_services
-    app: mysql
-  type: ClusterIP
+    app: ft_services
+    tier: mysql
   ports:
   - port: 3306
-    name: mysql
+  clusterIP: None

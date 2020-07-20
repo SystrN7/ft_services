@@ -1,0 +1,54 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    mysql_deployment.yaml                              :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/16 15:57:23 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/18 13:42:10 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: ft_services
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ft_services
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ft_services
+        tier: mysql
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: mysql
+        image: ft_mysql:1.0
+        
+        ports:
+        - containerPort: 3306
+          name: mysql
+
+        env:
+        - name: MYSQL_ROOT_NAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: username
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: password
