@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/05 15:44:06 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/07/20 10:42:57 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,39 +56,13 @@ fi
 # Linking client docker with docker in virtual box
 eval $(minikube docker-env)
 
-# Build docker image
-
-docker image build --no-cache=true --tag ft_nginx:1.0 ./srcs//Docker/Nginx
-docker image build --no-cache=true --tag ft_mysql:1.0 ./srcs/Docker/MySQL
+# Build docker all docker image
+docker image build --no-cache=true --tag ft_nginx:1.0 ./srcs//Docker/Nginx/
+docker image build --no-cache=true --tag ft_mysql:1.0 ./srcs/Docker/MySQL/
 docker image build --no-cache=true --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
-docker image build --no-cache=true --tag ft_wordpress:1.0 ./srcs/Docker/Wordpress/
+docker image build --no-cache=true --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
+docker image build --no-cache=true --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
 
 # Deploy with kubernetes
+kubectl apply -k ./srcs/Kubernetes/
 
-# Dashboard
-# TODO find a better way to resolve it 
-#minikube dashboard &
-
-# Ingress nginx
-
-# Nginx
-
-kubectl create -f srcs/Kubernetes/Nginx/nginx_pod.yaml
-kubectl create -f srcs/Kubernetes/Nginx/nginx_service.yaml
-kubectl create -f srcs/Kubernetes/Nginx/nginx_service_ssh.yaml
-
-# Ingress
-
-kubectl create -f srcs/Kubernetes/Ingress/ingress_redirect.yaml
-
-# MySQL
-
-kubectl create -f srcs/Kubernetes/MySQL/mysql_pod.yaml
-kubectl create -f srcs/Kubernetes/MySQL/mysql_service.yaml
-
-# Phpmyadmin
-
-kubectl create -f srcs/Kubernetes/PHPMyAdmin/phpmyadmin_pod.yaml
-kubectl create -f srcs/Kubernetes/PHPMyAdmin/phpmyadmin_service.yaml
-
-# Wordpress
