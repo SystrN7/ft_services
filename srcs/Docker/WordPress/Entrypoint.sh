@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 15:19:47 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/07/20 10:34:12 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 #!bin/sh
 
+### SETTINGS ###
 # $WORDPRESS_SITE_ URL
 # $WORDPRESS_SITE_NAME
 
@@ -29,7 +30,7 @@
 # WORDPRESS_USER_RANDOM
 
 # Set default value
-[ -z "$WORDPRESS_SITE_URL" ] && WORDPRESS_SITE_URL=http://192.168.99.100:4050/ # TODO : Find beater way to get default url
+[ -z "$WORDPRESS_SITE_URL" ] && WORDPRESS_SITE_URL=http://192.168.99.100:5050/ # TODO : Find beater way to get default url
 [ -z "$WORDPRESS_SITE_NAME" ] && WORDPRESS_SITE_NAME="101 Gossip."
 
 [ -z "$WORDPRESS_DATABASE_PORT" ] && WORDPRESS_DATABASE_PORT=3306

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Test.sh                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 11:45:34 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 15:22:30 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/06/19 12:26:34 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ docker container run -d \
 	 -e WORDPRESS_DATABASE_NAME=wordpress \
 	 -e WORDPRESS_DATABASE_USER=root \
 	 -e WORDPRESS_DATABASE_PASSWORD=root \
+	 -e WORDPRESS_SITE_URL=http://192.168.99.100:4050
 	 -e WORDPRESS_USER_IMPORT_CSV=true \
 	 -e WORDPRESS_USER_RANDOM=25 \
 	 -p 4050:80 \
