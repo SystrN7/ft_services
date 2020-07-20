@@ -6,21 +6,23 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:56:57 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/16 15:56:59 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/06/18 13:47:36 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
+# Header
 apiVersion: v1
 kind: Service
 metadata:
     name: phpmyadmin-service
+    labels:
+      app: ft_services
+
 spec:
   selector:
-	project: ft_services
-    app: phpmyadmin
+    app: ft_services
+    tier: phpmyadmin
   type: NodePort
   ports:
   - port: 5000
-    targetPort: 5000
-    nodePort: 30500
     name: phpmyadmin

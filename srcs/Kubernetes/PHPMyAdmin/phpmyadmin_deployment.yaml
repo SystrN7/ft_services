@@ -1,0 +1,61 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    phpmyadmin_deployment.yaml                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/16 15:57:04 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/18 15:48:31 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    app: ft_services
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ft_services
+      tier: phpmyadmin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ft_services
+        tier: phpmyadmin
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: phpmyadmin
+        image: ft_phpmyadmin:1.0
+
+        ports:
+        - containerPort: 80
+          hostPort: 5000
+          name: phpmyadmin
+
+        env:
+        - name: PMA_HOST
+          value: "mysql"
+        - name: PMA_PMADB
+          value: "phpmyadmin"
+        - name: PMA_PORT
+          value: "3306"
+        - name: PMA_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: username
+        - name: PMA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: password
