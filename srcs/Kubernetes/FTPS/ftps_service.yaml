@@ -1,0 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ftps_service.yaml                                  :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/20 10:44:46 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/20 10:53:31 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: v1
+kind: Service
+metadata:
+    name: ftps-service
+    labels:
+      app: ft_services
+
+spec:
+  selector:
+    app: ft_services
+    tier: ftps
+  type: NodePort
+  ports:
+  - port: 21
+    name: ftps
