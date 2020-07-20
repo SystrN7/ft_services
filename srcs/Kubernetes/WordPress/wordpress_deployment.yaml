@@ -1,0 +1,65 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    wordpress_deployment.yaml                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/05 18:50:13 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/19 12:25:04 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+
+# Header
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpess
+  labels:
+    app: ft_services
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ft_services
+      tier: wordpess
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ft_services
+        tier: wordpess
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: wordpess
+        image: ft_wordpress:1.0
+
+        ports:
+        - containerPort: 80
+          hostPort: 5050
+          name: wordpess
+        env:
+        - name: WORDPRESS_DATABASE_HOST
+          value: "mysql"
+        - name: WORDPRESS_DATABASE_PORT
+          value: "3306"
+        - name: WORDPRESS_DATABASE_NAME
+          value: "wordpess"
+        - name: WORDPRESS_DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: username
+        - name: WORDPRESS_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: password
+        - name: WORDPRESS_SITE_URL
+          value: http://192.168.99.100:5050
+        - name: WORDPRESS_USER_IMPORT_CSV
+          value: ture

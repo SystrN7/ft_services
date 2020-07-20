@@ -1,0 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    wordpress_service.yaml                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/05 18:50:17 by fgalaup           #+#    #+#              #
+#    Updated: 2020/06/19 10:00:27 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: v1
+kind: Service
+metadata:
+    name: wordpress-service
+    labels:
+      app: ft_services
+
+spec:
+  selector:
+    app: ft_services
+    tier: wordpress
+  type: NodePort
+  ports:
+  - port: 5050
+    name: wordpress
