@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 10:42:57 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/07/20 11:32:40 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ docker image build --no-cache=true --tag ft_mysql:1.0 ./srcs/Docker/MySQL/
 docker image build --no-cache=true --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
 docker image build --no-cache=true --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
 docker image build --no-cache=true --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
+docker image build --no-cache=true --tag ft_influxdb:1.0 ./srcs/Docker/InfluxDB/
 
 # Deploy with kubernetes
 kubectl apply -k ./srcs/Kubernetes/
