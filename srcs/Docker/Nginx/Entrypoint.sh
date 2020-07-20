@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 11:23:19 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/12 12:09:54 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/06/18 15:47:40 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,12 @@
 adduser -D "$SSH_USER"
 echo "$SSH_USER:$SSH_PASSWORD" | chpasswd
 
-# Start SSH Services
+echo "Login : $SSH_USER\n Password : $SSH_PASSWORD"
+
+# Start SSH Service
+echo "[start] - SSH Deamon"
 /usr/sbin/sshd
 
+echo "[Start] - Nginx"
 # Start Nginx
 nginx -g "daemon off;"
