@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 14:27:56 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/07/20 18:17:53 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ fi
 eval $(minikube docker-env)
 
 # Build docker all docker image
-docker image build --no-cache=true --tag ft_nginx:1.0 ./srcs//Docker/Nginx/
+docker image build --no-cache=true --tag ft_nginx:1.0 ./srcs/Docker/Nginx/
 docker image build --no-cache=true --tag ft_mysql:1.0 ./srcs/Docker/MySQL/
 docker image build --no-cache=true --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
 docker image build --no-cache=true --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
