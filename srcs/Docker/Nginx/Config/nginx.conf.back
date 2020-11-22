@@ -1,0 +1,27 @@
+# Http
+server
+{
+	# Redirect all of http connection to https
+	listen 80;
+	listen [::]:80;
+
+	server_name _;
+
+	return 301 https://$host$request_uri;
+}
+
+# Https
+server
+{
+	listen 443 ssl default_server;
+	listen [::]:443 ssl default_server;
+	server_name _;
+
+	# SSL certificate
+	ssl_certificate /Application/Certs/tls.crt;
+	ssl_certificate_key /Application/Certs/tls.key;
+
+	# Default file and root directory
+	index index.html index.htm;
+	root /Application/www;
+}

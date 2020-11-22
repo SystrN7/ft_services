@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/16 14:05:25 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/11/22 15:37:02 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,10 @@ RUN adduser -DH -g 'www' www
 RUN apk update && \
 	apk add --no-cache \
 	nginx \
-	openssh
+	openssl \
+	openssh \
+	gcompat \
+	libc6-compat
 
 # Generate SSH key
 RUN ssh-keygen -A
@@ -38,12 +41,19 @@ RUN mkdir /Application && \
 	chown -R www:www /Application
 
 # Configure Nginx
-COPY Config/nginx.conf /etc/nginx/
+COPY Config/ /etc/nginx/
+# Fix Error : https://superuser.com/questions/1306656/cant-run-nginx-in-alpine-linux-docker
+RUN mkdir -p /run/nginx
+
+RUN mkdir /etc/nginx/sites-enabled/ && \
+	ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 
 # Setup SSL Certificate
-# ! : NEED TO BE DEPRECETED !
-COPY Config/Certs/tls.crt /Application/Certs/
-COPY Config/Certs/tls.key /Application/Certs/
+RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:1024 \
+	-subj "/C=FT/ST=SERVICE/L=C/O=LA/CN=www.MORT.com" \
+	-keyout /Application/Certs/ssl.key -out /Application/Certs/ssl.crt
+
 
 # Setup site files
 COPY Application/* /Application/www
