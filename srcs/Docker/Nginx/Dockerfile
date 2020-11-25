@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/11/22 15:37:02 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/11/25 11:56:54 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,14 @@ EXPOSE 443 80 22
 # Creating Nginx User
 RUN adduser -DH -g 'www' www
 
-# Install Nginx
+# Install Nginx and tool to creating ssl key 
 RUN apk update && \
 	apk add --no-cache \
 	nginx \
 	openssl \
-	openssh \
 	gcompat \
 	libc6-compat
-
-# Generate SSH key
-RUN ssh-keygen -A
+# ??? Check if last dependecy is requiered
 
 # Make Application Directory
 RUN mkdir /Application && \
