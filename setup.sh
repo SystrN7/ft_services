@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 18:17:53 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/11/25 15:29:22 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@
 if ! which docker > /dev/null 2>&1
 then
     # Install Docker
-    sudo apt install docker
+    brew install docker
 fi
 
 # Minikube
 if ! which minikube > /dev/null 2>&1
 then
     # Install Minikube
-    sudo apt install minikube
+    brew install minikube
 fi
 
 # =============================== RUN MINIKUBE =============================== #
@@ -47,8 +47,9 @@ then
     fi
 
     # Make search to enable
-    minikube addons enable ingress
-    # minikube addons enable metrics-server
+	minikube addons enable metallb
+	minikube addons enable dashboard
+	minikube addons enable metrics-server
 fi
 
 # ================================== DEPLOY ================================== #
@@ -68,3 +69,4 @@ docker image build --no-cache=true --tag ft_graphana:1.0 ./srcs/Docker/Graphana/
 # Deploy with kubernetes
 kubectl apply -k ./srcs/Kubernetes/
 
+minikube dashboard

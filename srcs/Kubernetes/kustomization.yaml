@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/17 15:38:11 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 14:27:23 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/11/25 15:46:28 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ secretGenerator:
 
 # Other Kubernetes resources
 resources:
-    - ./Ingress/ingress_redirect.yaml
+      # Load Balancer
+    - ./LoadBalancer/metallb_config-map.yaml
       # Nginx
     - ./Nginx/nginx_deployment.yaml
     - ./Nginx/nginx_service.yaml
