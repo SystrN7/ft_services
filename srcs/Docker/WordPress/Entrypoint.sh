@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 10:34:12 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2020/11/25 16:34:45 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ then
 	# Creating config file if doesn't exit.
 	if [ ! -f /Application/Wordpress/wp-config.php ] ;
 	then
-		echo "Creating configuartion file." ;
+		echo "Creating configuration file." ;
 		wp config create --path=Application/Wordpress \
 			--dbhost="$WORDPRESS_DATABASE_HOST" \
 			--dbname="$WORDPRESS_DATABASE_NAME" \
