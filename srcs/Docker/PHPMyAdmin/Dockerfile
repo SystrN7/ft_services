@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/07 12:33:29 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/07 14:38:34 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ RUN sed -i 's/user = nobody/user = www/g' etc/php7/php-fpm.d/www.conf && \
 # Configure PHPMyAdmin
 COPY Config/config.inc.php /Application/PHPMyAdmin/config.inc.php
 
-# Fix bug when copy file without write permission
+# Fix bug when copy file without right permission
 RUN mkdir /Application/PHPMyAdmin/tmp && \
 	chown -R www:www /Application/PHPMyAdmin && \
 	chmod 755 /Application/PHPMyAdmin/config.inc.php 
