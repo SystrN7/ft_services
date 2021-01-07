@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/26 13:27:51 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/07 12:33:29 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,10 @@ RUN apk update && \
 # RUN mkdir /Application/PHPMyAdmin
 
 # Setup PHPMyAdmin Files
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.1/phpMyAdmin-5.0.1-all-languages.tar.gz && \
-	tar zxf phpMyAdmin-5.0.1-all-languages.tar.gz && \
-	rm -f phpMyAdmin-5.0.1-all-languages.tar.gz && \
-	mv phpMyAdmin-5.0.1-all-languages /Application/PHPMyAdmin
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-english.tar.gz && \
+	tar zxf phpMyAdmin-5.0.4-english.tar.gz && \
+	rm -f phpMyAdmin-5.0.4-english.tar.gz && \
+	mv phpMyAdmin-5.0.4-english /Application/PHPMyAdmin
 
 # RUN echo "<?php phpinfo(); ?>" > /Application/PHPMyAdmin/index.php
 
@@ -70,8 +70,10 @@ RUN sed -i 's/user = nobody/user = www/g' etc/php7/php-fpm.d/www.conf && \
 # Configure PHPMyAdmin
 COPY Config/config.inc.php /Application/PHPMyAdmin/config.inc.php
 
+# Fix bug when copy file without write permission
 RUN mkdir /Application/PHPMyAdmin/tmp && \
-	chown www:www /Application/PHPMyAdmin/tmp
+	chown -R www:www /Application/PHPMyAdmin && \
+	chmod 755 /Application/PHPMyAdmin/config.inc.php 
 
 # Copy entrypoint
 COPY Entrypoint.sh /Entrypoint.sh

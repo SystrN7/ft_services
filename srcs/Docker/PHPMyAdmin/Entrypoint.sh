@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/23 14:43:30 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/08 17:37:33 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/07 12:37:11 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 

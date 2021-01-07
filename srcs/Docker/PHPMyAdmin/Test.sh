@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Test.sh                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 11:45:34 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/08 14:45:09 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/07 12:37:03 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
