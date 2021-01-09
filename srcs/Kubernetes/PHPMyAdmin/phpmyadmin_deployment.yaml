@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:04 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/18 15:48:31 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/09 16:41:13 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: ft-services
   name: phpmyadmin
   labels:
-    app: ft_services
+    app: phpmyadmin
 
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: ft_services
-      tier: phpmyadmin
+      app: phpmyadmin
+  replicas: 1
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: ft_services
-        tier: phpmyadmin
+        app: phpmyadmin
+        
     spec:
       restartPolicy: Always
       containers:
@@ -38,13 +38,12 @@ spec:
         image: ft_phpmyadmin:1.0
 
         ports:
-        - containerPort: 80
-          hostPort: 5000
-          name: phpmyadmin
+        - name: phpmyadmin
+          containerPort: 80
 
         env:
         - name: PMA_HOST
-          value: "mysql"
+          value: "mysql-service"
         - name: PMA_PMADB
           value: "phpmyadmin"
         - name: PMA_PORT
@@ -52,10 +51,10 @@ spec:
         - name: PMA_USER
           valueFrom:
             secretKeyRef:
-              name: mysql-root
+              name: mysql-secret
               key: username
         - name: PMA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-root
+              name: mysql-secret
               key: password

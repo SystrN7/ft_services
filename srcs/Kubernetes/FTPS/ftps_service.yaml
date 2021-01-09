@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 10:44:46 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/20 10:53:31 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/06 17:09:21 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: ftps-service
-    labels:
-      app: ft_services
+  namespace: ft-services
+  name: ftps-service
+  labels:
+    app: ftps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: address-pool
 
 spec:
+  type: LoadBalancer
   selector:
-    app: ft_services
-    tier: ftps
-  type: NodePort
+    app: ftps
   ports:
-  - port: 21
-    name: ftps
+  - name: ftps
+    port: 21
+    targetPort: 21
+  - name: ftps-data
+    port: 15000
+    targetPort: 15000

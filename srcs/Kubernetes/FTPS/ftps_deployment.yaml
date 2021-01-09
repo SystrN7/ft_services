@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 10:45:24 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/20 11:58:26 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/06 16:43:35 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: ft-services
   name: ftps
   labels:
-    app: ft_services
+    app: ftps
 
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: ft_services
-      tier: ftps
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: ftps
   template:
     metadata:
       labels:
-        app: ft_services
-        tier: ftps
+        app: ftps
+
     spec:
       restartPolicy: Always
       containers:
@@ -38,16 +38,19 @@ spec:
         image: ft_ftps:1.0
 
         ports:
-        - containerPort: 21
-          name: ftps
+        - name: ftps
+          containerPort: 21
+        - name: ftps-data
+          containerPort: 15000
+          
         env:
         - name: FTP_USER
           valueFrom:
             secretKeyRef:
-              name: ftps-user
+              name: ftps-secret
               key: username
         - name: FTP_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: ftps-user
+              name: ftps-secret
               key: password

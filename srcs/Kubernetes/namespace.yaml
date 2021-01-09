@@ -1,30 +1,19 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    nginx_service_ssh.yaml                             :+:      :+:    :+:    #
+#    namespace.yaml                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/06/16 15:57:15 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/18 11:13:26 by fgalaup          ###   ########lyon.fr    #
+#    Created: 2020/12/10 17:04:17 by felix             #+#    #+#              #
+#    Updated: 2021/01/06 10:12:26 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 # Header
 apiVersion: v1
-kind: Service
+kind: Namespace
 metadata:
-    name: ssh-service
-    labels:
-      app: ft_services
-
-spec:
-  selector:
-    app: ft_services
-    tier: nginx
-  type: NodePort
-  ports:
-  - port: 22
-    targetPort: 22
-    nodePort: 30000
-    name: ssh
+  name: ft-services
+  labels:
+    name: ft-services

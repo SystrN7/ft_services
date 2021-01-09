@@ -6,51 +6,55 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/17 15:38:11 by fgalaup           #+#    #+#              #
-#    Updated: 2020/11/25 15:46:28 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/06 11:07:17 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 # Kubernetes environment config
-secretGenerator:
-  - name: ssh-user
-    literals:
-    - username=admin
-    - password=admin
-  - name: mysql-root
-    literals:
-    - username=root
-    - password=root
-  - name: ftps-user
-    literals:
-    - username=admin
-    - password=admin
+# secretGenerator:
+#   - name: ssh-user
+#     literals:
+#     - username=admin
+#     - password=admin
+#   - name: mysql-root
+#     literals:
+#     - username=root
+#     - password=root
+#   - name: ftps-user
+#     literals:
+#     - username=admin
+#     - password=admin
 
 # Other Kubernetes resources
 resources:
+      # Namesapce
+    - ./namespace.yaml
       # Load Balancer
     - ./LoadBalancer/metallb_config-map.yaml
       # Nginx
     - ./Nginx/nginx_deployment.yaml
     - ./Nginx/nginx_service.yaml
-    - ./Nginx/nginx_service_ssh.yaml
       # MySQL
     - ./MySQL/mysql_deployment.yaml
     - ./MySQL/mysql_service.yaml
+    - ./MySQL/mysql_secrets.yaml
       # PHPMyAdmin
     - ./PHPMyAdmin/phpmyadmin_deployment.yaml
     - ./PHPMyAdmin/phpmyadmin_service.yaml
       # WordPress
     - ./WordPress/wordpress_deployment.yaml
     - ./WordPress/wordpress_service.yaml
-      # FTPS
+    - ./WordPress/wordpress_secrets.yaml
+    #   # FTPS
     - ./FTPS/ftps_deployment.yaml
     - ./FTPS/ftps_service.yaml
-      # InfluxDB
-    - ./InfluxDB/influxdb_deployment.yaml
-    - ./InfluxDB/influxdb_service.yaml
-      # Graphana
-    - ./Graphana/graphana_deployment.yaml
-    - ./Graphana/graphana_service.yaml 
+    - ./FTPS/ftps_secrets.yaml
+    #   # InfluxDB
+    # - ./InfluxDB/influxdb_deployment.yaml
+    # - ./InfluxDB/influxdb_service.yaml
+    #   # Graphana
+    # - ./Graphana/graphana_deployment.yaml
+    # - ./Graphana/graphana_service.yaml 
 
   # - kubernetes-dashboard.yaml
   # - ftps.yaml
