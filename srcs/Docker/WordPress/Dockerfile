@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/03/11 14:59:54 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/09 12:02:18 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,9 +51,9 @@ RUN apk update && \
 	mysql-client
 
 # Setup Wordpress Files
-RUN wget https://wordpress.org/wordpress-5.3.2.tar.gz && \
-	tar zxf wordpress-5.3.2.tar.gz && \
-	rm -f wordpress-5.3.2.tar.gz && \
+RUN wget https://fr.wordpress.org/latest-fr_FR.tar.gz && \
+	tar zxf latest-fr_FR.tar.gz && \
+	rm -f latest-fr_FR.tar.gz && \
 	mv wordpress /Application/Wordpress && \
 	chown -R www:www /Application/Wordpress && \
 	chmod -R 744 /Application/Wordpress
