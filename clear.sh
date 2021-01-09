@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 15:19:43 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/19 12:43:54 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/07 18:31:39 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,6 @@ fi
 if [ "$1" = "--all" ]
 then
 	minikube delete --purge=true
-	sudo apt remove minikube
-	sudo apt remove docker
+	bew remove minikube
+	bew remove docker
 fi
