@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 11:17:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 11:18:18 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 16:57:04 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,29 +14,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: graphana
+  namespace: ft-services
+  name: grafana
   labels:
-    app: ft_services
+    app: grafana
 
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: ft_services
-      tier: graphana
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: grafana
   template:
     metadata:
       labels:
-        app: ft_services
-        tier: graphana
+        app: grafana
     spec:
       restartPolicy: Always
       containers:
-      - name: graphana
-        image: ft_graphana:1.0
+      - name: grafana
+        image: ft_grafana:1.0
 
         ports:
-        - containerPort: 3000
-          name: graphana
+        - name: grafana
+          containerPort: 3000

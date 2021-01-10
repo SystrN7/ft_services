@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 11:28:39 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 18:17:47 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 16:48:57 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,5 +19,5 @@ then
 	docker image build --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
 	docker image build --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
 	docker image build --tag ft_influxdb:1.0 ./srcs/Docker/InfluxDB/
-	docker image build --tag ft_graphana:1.0 ./srcs/Docker/Graphana/
+	docker image build --tag ft_grafana:1.0 ./srcs/Docker/Grafana/
 fi

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    graphana_services.yaml                             :+:      :+:    :+:    #
+#    graphana_service.yaml                              :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 11:10:33 by fgalaup           #+#    #+#              #
-#    Updated: 2020/07/20 11:17:01 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 16:55:46 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: graphana-service
-    labels:
-      app: ft_services
+  namespace: ft-services
+  name: grafana-service
+  labels:
+    app: grafana
+  annotations:
+    metallb.universe.tf/allow-shared-ip: address-pool
 
 spec:
+  type: LoadBalancer
   selector:
-    app: ft_services
-    tier: graphana
-  type: NodePort
+    app: grafana
   ports:
-  - port: 3000
-    name: graphana
+  - name: grafana
+    port: 3000
+    targetPort: 80

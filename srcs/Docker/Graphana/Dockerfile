@@ -12,49 +12,37 @@
 
 FROM alpine:latest
 
-COPY grafana-latest.linux-x64-musl.tar.gz /tmp/grafana.tar.gz
-
-RUN mkdir /tmp/grafana && \
-	tar xfz /tmp/grafana.tar.gz --strip-components=1 -C /tmp/grafana && \
-	rm /tmp/grafana.tar.gz
-
-ARG GF_UID="472"
-ARG GF_GID="472"
-
-ENV PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-	GF_PATHS_CONFIG="/etc/grafana/grafana.ini" \
-	GF_PATHS_DATA="/var/lib/grafana" \
-	GF_PATHS_HOME="/usr/share/grafana" \
-	GF_PATHS_LOGS="/var/log/grafana" \
-	GF_PATHS_PLUGINS="/var/lib/grafana/plugins" \
-	GF_PATHS_PROVISIONING="/etc/grafana/provisioning"
-
-WORKDIR $GF_PATHS_HOME
-
-RUN apk add --no-cache ca-certificates bash tzdata && \
-	apk add --no-cache --upgrade openssl musl-utils
-
-RUN mv /tmp/grafana/* "$GF_PATHS_HOME"
-
-RUN mkdir -p "$GF_PATHS_HOME/.aws" && \
-	addgroup -S -g $GF_GID grafana && \
-	adduser -S -u $GF_UID -G grafana grafana && \
-	mkdir -p "$GF_PATHS_PROVISIONING/datasources" \
-			 "$GF_PATHS_PROVISIONING/dashboards" \
-			 "$GF_PATHS_PROVISIONING/notifiers" \
-			 "$GF_PATHS_LOGS" \
-			 "$GF_PATHS_PLUGINS" \
-			 "$GF_PATHS_DATA" && \
-	cp "$GF_PATHS_HOME/conf/sample.ini" "$GF_PATHS_CONFIG" && \
-	cp "$GF_PATHS_HOME/conf/ldap.toml" /etc/grafana/ldap.toml && \
-	chown -R grafana:grafana "$GF_PATHS_DATA" "$GF_PATHS_HOME/.aws" "$GF_PATHS_LOGS" "$GF_PATHS_PLUGINS" "$GF_PATHS_PROVISIONING" && \
-	chmod -R 777 "$GF_PATHS_DATA" "$GF_PATHS_HOME/.aws" "$GF_PATHS_LOGS" "$GF_PATHS_PLUGINS" "$GF_PATHS_PROVISIONING"
-
 EXPOSE 3000
+
+VOLUME	[ "/Application/Grafana/data" ]
+
+RUN apk update && \
+	apk add --no-cache \
+	curl \
+	libc6-compat
+
+# Download
+RUN	mkdir -p /Application/Grafana && \
+	wget https://dl.grafana.com/oss/release/grafana-7.1.5.linux-amd64.tar.gz && \
+	tar -zxvf grafana-7.1.5.linux-amd64.tar.gz && \
+	rm grafana-7.1.5.linux-amd64.tar.gz && \
+	mv grafana-7.1.5 /Application/Grafana/
+
+# Fix libc dependency to run the grafana binary
+# RUN		mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+
+# Installation
+RUN	ln -s /Application/Grafana/bin/grafana-cli /usr/bin && \
+	ln -s /Application/Grafana/bin/grafana-server /usr/bin
+
+# Configure
+# RUN	mv /root/datasources.yaml /Application/Grafana/conf/provisioning/datasources && \
+# 		mv /root/dashboard.yaml /Application/Grafana/conf/provisioning/dashboards && \
+# 		mv /root/dashboard.json /Application/Grafana/conf/provisioning/dashboards
+
+USER grafana
 
 # Copy Entrypoint
 COPY Entrypoint.sh /
-
-USER grafana
 
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]

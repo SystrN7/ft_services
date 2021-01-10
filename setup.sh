@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 16:02:50 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 16:49:16 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ docker image build --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
 docker image build --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
 docker image build --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
 docker image build --tag ft_influxdb:1.0 ./srcs/Docker/InfluxDB/
-docker image build --tag ft_graphana:1.0 ./srcs/Docker/Graphana/
+docker image build --tag ft_grafana:1.0 ./srcs/Docker/Grafana/
 
 # Deploy with kubernetes
 kubectl apply -k ./srcs/Kubernetes/
