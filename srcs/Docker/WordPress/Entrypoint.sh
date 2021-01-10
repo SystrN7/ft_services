@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2020/11/25 16:34:45 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 15:51:24 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,15 @@
 # Creating configuration file and database
 if [  -n "$WORDPRESS_DATABASE_HOST" ] && [ -n "$WORDPRESS_DATABASE_USER" ] && [ -n "$WORDPRESS_DATABASE_PASSWORD" ] ;
 then
+	# Wait MySQL server start
+	counter=0;
+	while [["mysql --host=${WORDPRESS_DATABASE_HOST} --port=${WORDPRESS_DATABASE_PORT} --user=${WORDPRESS_DATABASE_USER} --password=${WORDPRESS_DATABASE_PASSWORD} -e\"quit\""] && [counter < 10]]
+	do
+		echo "Trying to connect to the database : " $counter
+		sleep 5;
+		counter=$((counter+1));
+	done
+	
 	# Creating config file if doesn't exit.
 	if [ ! -f /Application/Wordpress/wp-config.php ] ;
 	then
