@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 20:52:07 by fgalaup           #+#    #+#              #
-#    Updated: 2020/06/20 20:56:54 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 15:19:46 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: ft-services
   name: influxdb
   labels:
-    app: ft_services
+    app: influxdb
 
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: ft_services
-      tier: influxdb
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: influxdb
   template:
     metadata:
       labels:
-        app: ft_services
-        tier: influxdb
+        app: influxdb
     spec:
       restartPolicy: Always
       containers:
@@ -38,5 +37,5 @@ spec:
         image: ft_influxdb:1.0
 
         ports:
-        - containerPort: 8086
-          name: influxdb
+        - name: influxdb
+          containerPort: 8086
