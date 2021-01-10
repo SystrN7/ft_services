@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2020/11/25 15:29:22 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 16:02:50 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,11 @@ fi
 if ! minikube status > /dev/null 2>&1
 then
     echo "Start Minikube ..."
-    if ! minikube start --vm-driver=virtualbox \
+    if ! minikube start --driver=virtualbox \
         --cpus 4 --disk-size=30000mb --memory=4000mb
         # \
         # --bootstrapper=kubeadm # allow telegraf to query metrics
-        # -p ft_services # add name
+        # -p ft_services # add namek8
     then
         echo "Cannot start minikube!"
         exit 1
@@ -54,17 +54,20 @@ fi
 
 # ================================== DEPLOY ================================== #
 
+# Get Minikube IP Addrress For Configuration
+
+
 # Linking client docker with docker in virtual box
 eval $(minikube docker-env)
 
 # Build docker all docker image
-docker image build --no-cache=true --tag ft_nginx:1.0 ./srcs/Docker/Nginx/
-docker image build --no-cache=true --tag ft_mysql:1.0 ./srcs/Docker/MySQL/
-docker image build --no-cache=true --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
-docker image build --no-cache=true --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
-docker image build --no-cache=true --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
-docker image build --no-cache=true --tag ft_influxdb:1.0 ./srcs/Docker/InfluxDB/
-docker image build --no-cache=true --tag ft_graphana:1.0 ./srcs/Docker/Graphana/
+docker image build --tag ft_nginx:1.0 ./srcs/Docker/Nginx/
+docker image build --tag ft_mysql:1.0 ./srcs/Docker/MySQL/
+docker image build --tag ft_phpmyadmin:1.0 ./srcs/Docker/PHPMyAdmin/
+docker image build --tag ft_wordpress:1.0 ./srcs/Docker/WordPress/
+docker image build --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
+docker image build --tag ft_influxdb:1.0 ./srcs/Docker/InfluxDB/
+docker image build --tag ft_graphana:1.0 ./srcs/Docker/Graphana/
 
 # Deploy with kubernetes
 kubectl apply -k ./srcs/Kubernetes/
