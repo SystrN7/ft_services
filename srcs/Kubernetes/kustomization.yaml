@@ -6,26 +6,11 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/17 15:38:11 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 16:57:51 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/10 17:17:29 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-# Kubernetes environment config
-# secretGenerator:
-#   - name: ssh-user
-#     literals:
-#     - username=admin
-#     - password=admin
-#   - name: mysql-root
-#     literals:
-#     - username=root
-#     - password=root
-#   - name: ftps-user
-#     literals:
-#     - username=admin
-#     - password=admin
-
-# Other Kubernetes resources
+# Kubernetes resources
 resources:
       # Namesapce
     - ./namespace.yaml
@@ -54,10 +39,4 @@ resources:
     - ./InfluxDB/influxdb_service.yaml
       # Grafana
     - ./Grafana/grafana_deployment.yaml
-    - ./Grafana/grafana_service.yaml 
-
-  # - kubernetes-dashboard.yaml
-  # - ftps.yaml
-  # - grafana.yaml
-  # - influxdb.yaml
-  # - telegraf.yaml
+    - ./Grafana/grafana_service.yaml
