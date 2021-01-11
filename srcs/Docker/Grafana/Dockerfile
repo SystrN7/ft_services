@@ -27,6 +27,12 @@ RUN	mkdir -p /Application/ && \
 # Fix libc dependency to run the grafana binary
 # RUN		mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
+# Creating Grafana User and 
+RUN adduser -DH -g 'grafana' grafana && \
+	chown -R grafana:grafana /Application/Grafana && \
+	chmod -R 744 /Application/Grafana
+
+
 # Installation
 RUN	ln -s /Application/Grafana/bin/grafana-cli /usr/bin && \
 	ln -s /Application/Grafana/bin/grafana-server /usr/bin
@@ -36,16 +42,15 @@ RUN	ln -s /Application/Grafana/bin/grafana-cli /usr/bin && \
 # 		mv /root/dashboard.yaml /Application/Grafana/conf/provisioning/dashboards && \
 # 		mv /root/dashboard.json /Application/Grafana/conf/provisioning/dashboards
 
-# Creating Grafana User
-RUN adduser -DH -g 'grafana' grafana
 
-USER grafana
+# USER grafana
 
 # Copy Entrypoint
-COPY Entrypoint.sh /
-
-VOLUME	[ "/Application/Grafana/data" ]
 
 EXPOSE 3000
+VOLUME	[ "/Application/Grafana/data" ]
 
+WORKDIR /Application/Grafana/
+
+COPY Entrypoint.sh /
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
