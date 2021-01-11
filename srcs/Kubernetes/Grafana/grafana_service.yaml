@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 11:10:33 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 17:13:05 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/11 11:30:49 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,4 +28,4 @@ spec:
   ports:
   - name: grafana
     port: 3000
-    targetPort: 80
+    targetPort: 3000
