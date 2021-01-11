@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 11:17:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 17:13:10 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/11 15:13:42 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,3 +39,21 @@ spec:
         ports:
         - name: grafana
           containerPort: 3000
+        env:
+          # Database Config
+          - name: GF_DATABASE_HOST
+            value: mysql-service
+          - name: GF_DATABASE_NAME
+            value: grafana
+          - name: GF_DATABASE_TYPE
+            value: mysql
+          - name: GF_DATABASE_USER 
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: username
+          - name: GF_DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
