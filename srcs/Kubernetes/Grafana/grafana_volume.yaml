@@ -1,0 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    grafana_volume.yaml                                :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/13 16:11:40 by felix             #+#    #+#              #
+#    Updated: 2021/01/13 16:12:39 by felix            ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: ft-services
+  name: grafana-volume
+  labels:
+    app: grafana
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
