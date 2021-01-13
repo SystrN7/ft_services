@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:23:52 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/23 11:49:46 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/13 15:44:40 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 # Set default user value
-[ -z "$MYSQL_DATA_PATH" ] && MYSQL_DATA_PATH=/Application/MySQL/DataBases
+[ -z "$MYSQL_DATA_PATH" ] && MYSQL_DATA_PATH=/Application/MySQL_DATA/
 [ -z "$MYSQL_ROOT_NAME" ] && MYSQL_ROOT_NAME=root
 [ -z "$MYSQL_ROOT_PASSWORD" ] && MYSQL_ROOT_PASSWORD=root
 
@@ -21,10 +21,17 @@ then
 	mkdir -p /run/mysqld
 fi
 
-# Init MySQL database
+# Creating data flolder 
+if [ ! -d "$MYSQL_DATA_PATH" ]
+then
+	mkdir -p "$MYSQL_DATA_PATH"
+fi
+
 if [ ! -d $MYSQL_DATA_PATH/mysql ]
 then
-	mysql_install_db --datadir="${MYSQL_DATA_PATH}" --user="${MYSQL_ROOT_NAME}" > /dev/null
+	mysql_install_db --datadir="${MYSQL_DATA_PATH}" --user="${MYSQL_ROOT_NAME}"
+else
+	echo "Database allredy exist."
 fi
 
 # Creating root user for remote access to the databases.
@@ -45,3 +52,4 @@ fi
 	--bind-address="0.0.0.0" \
 	--port="3306" \
 	--console
+
