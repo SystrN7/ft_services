@@ -6,7 +6,7 @@
 #    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:11 by fgalaup           #+#    #+#              #
-#    Updated: 2020/12/24 17:04:29 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/13 11:56:35 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,22 @@ spec:
 
     spec:
       restartPolicy: Always
+
+      volumes:
+        - name: nginx-persistent-volume
+          persistentVolumeClaim:
+              claimName: nginx-volume
+
       containers:
       - name: nginx
         image: ft_nginx:1.0
+
         ports:
         - name: https
           containerPort: 443
         - name: http
           containerPort: 80
+
+        volumeMounts:
+          - name: nginx-persistent-volume
+            mountPath: /Application/WWW

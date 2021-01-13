@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2020/11/25 11:56:54 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/13 16:29:56 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ RUN apk update && \
 # Make Application Directory
 RUN mkdir /Application && \
 	mkdir /Application/Certs && \
-	mkdir /Application/www && \
+	mkdir /Application/tmp && \
 	chown -R www:www /var/lib/nginx && \
 	chown -R www:www /Application
 
@@ -53,7 +53,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:1024 \
 
 
 # Setup site files
-COPY Application/* /Application/www
+COPY Application/* /Application/tmp
 
 
 # Copy entrypoint

@@ -1,25 +1,25 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Entrypoint.sh                                      :+:      :+:    :+:    #
+#    nginx_volume.yaml                                  :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/02/09 11:23:19 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 18:37:41 by felix            ###   ########lyon.fr    #
+#    Created: 2021/01/13 11:01:11 by felix             #+#    #+#              #
+#    Updated: 2021/01/13 13:01:11 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-#!bin/sh
-
-
-# Copy default file in www
-if [ -z "$(ls -A /Application/WWW)" ]
-then
-	echo "Copy To the volume";
-	mv /Application/tmp/* /Application/WWW/;
-fi
-
-echo "[Start] - Nginx"
-# Start Nginx
-nginx -g "daemon off;"
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: ft-services
+  name: nginx-volume
+  labels:
+    app: nginx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
