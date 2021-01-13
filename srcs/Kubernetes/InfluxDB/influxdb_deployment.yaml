@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    influxdb_deployment.yaml                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 20:52:07 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 15:19:46 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/13 12:50:35 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,12 @@ spec:
         app: influxdb
     spec:
       restartPolicy: Always
+
+      volumes:
+        - name: influxdb-persistent-volume
+          persistentVolumeClaim:
+              claimName: influxdb-volume
+
       containers:
       - name: influxdb
         image: ft_influxdb:1.0
@@ -39,3 +45,7 @@ spec:
         ports:
         - name: influxdb
           containerPort: 8086
+
+        volumeMounts:
+          - name: influxdb-persistent-volume
+            mountPath: /Application/InfluxDB

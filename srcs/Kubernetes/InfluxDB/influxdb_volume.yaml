@@ -1,31 +1,25 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    influxdb_volume.yaml                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/16 09:56:16 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 13:03:51 by felix            ###   ########lyon.fr    #
+#    Created: 2021/01/13 12:41:40 by felix             #+#    #+#              #
+#    Updated: 2021/01/13 12:42:03 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-# Use the last version of alpine linux
-FROM alpine:latest
-
-# Expose application port
-EXPOSE 8086
-# Volume to persiting data
-VOLUME /Application/InfluxDB/
-
-# Install InfluxDB
-RUN apk update && \
-	apk add --no-cache \
-	influxdb
-
-# Copy IfluxDB config
-COPY Config/influxdb.conf /etc/influxdb/influxdb.conf
-
-# Copy Entrypoint
-COPY Entrypoint.sh /
-ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: ft-services
+  name: influxdb-volume
+  labels:
+    app: influxdb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
