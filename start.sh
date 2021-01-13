@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    start.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 10:06:06 by fgalaup           #+#    #+#              #
-#    Updated: 2020/02/17 11:47:37 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/12 11:22:48 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
+#!/bin/sh
 
 minikube start

@@ -3,13 +3,12 @@
 #                                                         :::      ::::::::    #
 #    setup.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:30:48 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 16:49:16 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/12 11:20:02 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
-
 
 #!/bin/sh
 
