@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    ftps_deployment.yaml                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 10:45:24 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/06 16:43:35 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/13 16:17:07 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,23 @@ spec:
 
     spec:
       restartPolicy: Always
+      volumes:
+        - name: mysql-persistent-volume
+          persistentVolumeClaim:
+              claimName: mysql-volume
+        - name: influxdb-persistent-volume
+          persistentVolumeClaim:
+              claimName: influxdb-volume
+        - name: wordpress-persistent-volume
+          persistentVolumeClaim:
+              claimName: wordpress-volume
+        - name: nginx-persistent-volume
+          persistentVolumeClaim:
+              claimName: nginx-volume
+        - name: grafana-persistent-volume
+          persistentVolumeClaim:
+              claimName: grafana-volume
+        
       containers:
       - name: ftps
         image: ft_ftps:1.0
@@ -42,6 +59,18 @@ spec:
           containerPort: 21
         - name: ftps-data
           containerPort: 15000
+
+        volumeMounts:
+          - name: mysql-persistent-volume
+            mountPath: /Application/MySQL
+          - name: influxdb-persistent-volume
+            mountPath: /Application/InfluxDB
+          - name: wordpress-persistent-volume
+            mountPath: /Application/Wordpress
+          - name: nginx-persistent-volume
+            mountPath: /Application/Nginx
+          - name: grafana-persistent-volume
+            mountPath: /Application/Grafana
           
         env:
         - name: FTP_USER
