@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    kustomization.yaml                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/17 15:38:11 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 17:17:29 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/13 16:15:34 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,12 @@ resources:
       # Nginx
     - ./Nginx/nginx_deployment.yaml
     - ./Nginx/nginx_service.yaml
+    - ./Nginx/nginx_volume.yaml
       # MySQL
     - ./MySQL/mysql_deployment.yaml
     - ./MySQL/mysql_service.yaml
     - ./MySQL/mysql_secrets.yaml
+    - ./MySQL/mysql_volume.yaml
       # PHPMyAdmin
     - ./PHPMyAdmin/phpmyadmin_deployment.yaml
     - ./PHPMyAdmin/phpmyadmin_service.yaml
@@ -30,6 +32,7 @@ resources:
     - ./WordPress/wordpress_deployment.yaml
     - ./WordPress/wordpress_service.yaml
     - ./WordPress/wordpress_secrets.yaml
+    - ./WordPress/wordpress_volume.yaml
     #   # FTPS
     - ./FTPS/ftps_deployment.yaml
     - ./FTPS/ftps_service.yaml
@@ -37,6 +40,8 @@ resources:
     #   # InfluxDB
     - ./InfluxDB/influxdb_deployment.yaml
     - ./InfluxDB/influxdb_service.yaml
+    - ./InfluxDB/influxdb_volume.yaml
       # Grafana
     - ./Grafana/grafana_deployment.yaml
     - ./Grafana/grafana_service.yaml
+    - ./Grafana/grafana_volume.yaml
