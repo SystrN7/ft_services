@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    wordpress_deployment.yaml                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/05 18:50:13 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/09 15:40:03 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/12 11:58:36 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,10 @@ spec:
 
     spec:
       restartPolicy: Always
+      volumes:
+        - name: wordpress-persistent-volume
+          persistentVolumeClaim:
+              claimName: wordpress-volume
       containers:
       - name: wordpress
         image: ft_wordpress:1.0
@@ -40,6 +44,10 @@ spec:
         ports:
         - name: wordpress
           containerPort: 80
+
+        volumeMounts:
+          - name: wordpress-persistent-volume
+            mountPath: /Application/Wordpress
 
         env:
         # Database Configuration

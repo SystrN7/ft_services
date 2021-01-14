@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 15:51:24 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/14 16:15:58 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,13 +42,20 @@
 
 [ -z "$WORDPRESS_USER_RANDOM" ] && WORDPRESS_USER_RANDOM=0
 
+# Copy default file in Volume Wordpress if dir is empty
+if [ -z "$(ls -A /Application/Wordpress)" ]
+then
+	echo "Copy To the volume";
+	mv /Application/tmp/wordpress/* /Application/Wordpress;
+	rm -R /Application/tmp;
+fi
 
 # Creating configuration file and database
 if [  -n "$WORDPRESS_DATABASE_HOST" ] && [ -n "$WORDPRESS_DATABASE_USER" ] && [ -n "$WORDPRESS_DATABASE_PASSWORD" ] ;
 then
 	# Wait MySQL server start
 	counter=0;
-	while [["mysql --host=${WORDPRESS_DATABASE_HOST} --port=${WORDPRESS_DATABASE_PORT} --user=${WORDPRESS_DATABASE_USER} --password=${WORDPRESS_DATABASE_PASSWORD} -e\"quit\""] && [counter < 10]]
+	while [[ mysql --host=${WORDPRESS_DATABASE_HOST} --port=${WORDPRESS_DATABASE_PORT} --user=${WORDPRESS_DATABASE_USER} --password=${WORDPRESS_DATABASE_PASSWORD} -e"quit"] && [counter < 10]]
 	do
 		echo "Trying to connect to the database : " $counter
 		sleep 5;
@@ -59,7 +66,7 @@ then
 	if [ ! -f /Application/Wordpress/wp-config.php ] ;
 	then
 		echo "Creating configuration file." ;
-		wp config create --path=Application/Wordpress \
+		wp config create --path=/Application/Wordpress \
 			--dbhost="$WORDPRESS_DATABASE_HOST" \
 			--dbname="$WORDPRESS_DATABASE_NAME" \
 			--dbuser="$WORDPRESS_DATABASE_USER" \
@@ -83,27 +90,27 @@ then
 			-e "CREATE DATABASE $WORDPRESS_DATABASE_NAME;"
 		
 		# Fill it with basic instalation
-		wp core install --path=Application/Wordpress \
+		wp core install --path=/Application/Wordpress \
 			--url="$WORDPRESS_SITE_URL" \
 			--title="$WORDPRESS_SITE_NAME" \
 			--admin_email="$WORDPRESS_ADMIN_EMAIL" \
 			--admin_user="$WORDPRESS_ADMIN_NAME" \
 			--admin_password="$WORDPRESS_ADMIN_PASSWORD"
-		wp option update siteurl "$WORDPRESS_SITE_URL" --path=Application/Wordpress 
+		wp option update siteurl "$WORDPRESS_SITE_URL" --path=/Application/Wordpress 
 	fi
 
 	# Import Users via csv
 	if [ -f /Application/Users.csv ] && [ "$WORDPRESS_USER_IMPORT_CSV"  == "true" ] ;
 	then
 		echo "Importing Users" ;
-		wp user import-csv --path=Application/Wordpress --skip-update /Application/Users.csv
+		wp user import-csv --path=/Application/Wordpress --skip-update /Application/Users.csv
 	fi
 
 	# Creating Random Users
 	if [ "$WORDPRESS_USER_RANDOM" -ge 1 ] ;
 	then
 		echo "Generating Users" ;
-		wp user generate --path=Application/Wordpress --count=$WORDPRESS_USER_RANDOM
+		wp user generate --path=/Application/Wordpress --count=$WORDPRESS_USER_RANDOM
 	fi
 fi
 

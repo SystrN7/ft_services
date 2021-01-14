@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/09 12:02:18 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/14 16:26:56 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ FROM ft_nginx:1.0
 
 # Exposed port
 EXPOSE 80
+# Volume to persiting data
+VOLUME /Application/Wordpress
 
 # Install PHP and fast cgi + mysql client
 RUN apk update && \
@@ -54,9 +56,9 @@ RUN apk update && \
 RUN wget https://fr.wordpress.org/latest-fr_FR.tar.gz && \
 	tar zxf latest-fr_FR.tar.gz && \
 	rm -f latest-fr_FR.tar.gz && \
-	mv wordpress /Application/Wordpress && \
-	chown -R www:www /Application/Wordpress && \
-	chmod -R 744 /Application/Wordpress
+	mv wordpress /Application/tmp && \
+	chown -R www:www /Application/tmp && \
+	chmod -R 744 /Application/tmp
 
 
 # Configure Nginx

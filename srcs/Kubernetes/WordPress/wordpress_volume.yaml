@@ -1,0 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    wordpress_volume.yaml                              :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/12 11:24:34 by felix             #+#    #+#              #
+#    Updated: 2021/01/12 12:14:00 by felix            ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: ft-services
+  name: wordpress-volume
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
