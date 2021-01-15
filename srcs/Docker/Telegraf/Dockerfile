@@ -6,25 +6,20 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/16 09:56:16 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/15 11:35:45 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/15 12:23:16 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 # Use the last version of alpine linux
 FROM alpine:latest
 
-# Expose application port
-EXPOSE 8086
-# Volume to persiting data
-VOLUME /Application/InfluxDB/
-
-# Install InfluxDB
+# Install Telegraf
 RUN apk update && \
-	apk add --no-cache \
-	influxdb
+	apk add --no-cache --allow-untrusted --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
+	telegraf=1.17.0-r0
 
-# Copy InfluxDB config
-COPY Config/influxdb.conf /etc/influxdb/influxdb.conf
+# Copy Telegraf config
+COPY Config/telegraf.conf /Application/Telegraf/
 
 # Copy Entrypoint
 COPY Entrypoint.sh /

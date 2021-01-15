@@ -1,31 +1,24 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    telegraf_cluster_role_binding.yaml                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/16 09:56:16 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/15 11:35:45 by fgalaup          ###   ########lyon.fr    #
+#    Created: 2021/01/15 12:36:34 by fgalaup           #+#    #+#              #
+#    Updated: 2021/01/15 12:38:31 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-# Use the last version of alpine linux
-FROM alpine:latest
-
-# Expose application port
-EXPOSE 8086
-# Volume to persiting data
-VOLUME /Application/InfluxDB/
-
-# Install InfluxDB
-RUN apk update && \
-	apk add --no-cache \
-	influxdb
-
-# Copy InfluxDB config
-COPY Config/influxdb.conf /etc/influxdb/influxdb.conf
-
-# Copy Entrypoint
-COPY Entrypoint.sh /
-ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: telegraf-role
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: telegraf-account
+  namespace: ft-services

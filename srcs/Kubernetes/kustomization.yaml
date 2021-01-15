@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    kustomization.yaml                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/17 15:38:11 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 16:15:34 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/15 13:08:32 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,11 @@ resources:
     - ./WordPress/wordpress_service.yaml
     - ./WordPress/wordpress_secrets.yaml
     - ./WordPress/wordpress_volume.yaml
-    #   # FTPS
+      # FTPS
     - ./FTPS/ftps_deployment.yaml
     - ./FTPS/ftps_service.yaml
     - ./FTPS/ftps_secrets.yaml
-    #   # InfluxDB
+      # InfluxDB
     - ./InfluxDB/influxdb_deployment.yaml
     - ./InfluxDB/influxdb_service.yaml
     - ./InfluxDB/influxdb_volume.yaml
@@ -45,3 +45,6 @@ resources:
     - ./Grafana/grafana_deployment.yaml
     - ./Grafana/grafana_service.yaml
     - ./Grafana/grafana_volume.yaml
+      # Telegraf
+    - ./Telegraf/telegraf_deployment.yaml
+    - ./Telegraf/telegraf_cluster_role_binding.yaml

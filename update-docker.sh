@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    update-docker.sh                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 11:28:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/12 11:22:55 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/15 12:42:14 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,4 +22,5 @@ then
 	docker image build --tag ft_ftps:1.0 ./srcs/Docker/FTPS/
 	docker image build --tag ft_influxdb:1.0 ./srcs/Docker/InfluxDB/
 	docker image build --tag ft_grafana:1.0 ./srcs/Docker/Grafana/
+	docker image build --tag ft_telegraf:1.0 ./srcs/Docker/Telegraf/
 fi

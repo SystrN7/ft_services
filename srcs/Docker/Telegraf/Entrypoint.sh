@@ -1,31 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/16 09:56:16 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/15 11:35:45 by fgalaup          ###   ########lyon.fr    #
+#    Created: 2020/03/16 10:55:10 by fgalaup           #+#    #+#              #
+#    Updated: 2021/01/15 12:23:55 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-# Use the last version of alpine linux
-FROM alpine:latest
+#!/bin/sh
 
-# Expose application port
-EXPOSE 8086
-# Volume to persiting data
-VOLUME /Application/InfluxDB/
-
-# Install InfluxDB
-RUN apk update && \
-	apk add --no-cache \
-	influxdb
-
-# Copy InfluxDB config
-COPY Config/influxdb.conf /etc/influxdb/influxdb.conf
-
-# Copy Entrypoint
-COPY Entrypoint.sh /
-ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
+# Start telegraf
+telegraf --config /Application/Telegraf/telegraf.conf

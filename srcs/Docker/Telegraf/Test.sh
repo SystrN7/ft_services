@@ -1,31 +1,34 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    Test.sh                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/16 09:56:16 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/15 11:35:45 by fgalaup          ###   ########lyon.fr    #
+#    Created: 2020/03/16 10:06:27 by fgalaup           #+#    #+#              #
+#    Updated: 2021/01/15 12:14:10 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-# Use the last version of alpine linux
-FROM alpine:latest
+#!/bin/sh
 
-# Expose application port
-EXPOSE 8086
-# Volume to persiting data
-VOLUME /Application/InfluxDB/
+eval $(minikube docker-env);
 
-# Install InfluxDB
-RUN apk update && \
-	apk add --no-cache \
-	influxdb
+# Creating docker image
+docker image build --tag ft_telegraf:1.0 .
 
-# Copy InfluxDB config
-COPY Config/influxdb.conf /etc/influxdb/influxdb.conf
+# Remove previous container
+docker stop telegraf
+docker container rm telegraf
 
-# Copy Entrypoint
-COPY Entrypoint.sh /
-ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
+# Docker run image
+docker container run -d \
+	 --name telegraf \
+	 -p 8086:8086 \
+	ft_telegraf:1.0
+
+# Show log after app start (to show error)
+sleep 5;
+docker logs telegraf
+
+# [i] Test Procedure
