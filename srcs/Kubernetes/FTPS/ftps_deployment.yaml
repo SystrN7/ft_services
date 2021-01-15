@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    ftps_deployment.yaml                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 10:45:24 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 16:17:07 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/14 17:25:00 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,12 @@ spec:
         ports:
         - name: ftps
           containerPort: 21
-        - name: ftps-data
+        - name: ftps-data0
           containerPort: 15000
+        - name: ftps-data1
+          containerPort: 15001
+        - name: ftps-data2
+          containerPort: 15002
 
         volumeMounts:
           - name: mysql-persistent-volume

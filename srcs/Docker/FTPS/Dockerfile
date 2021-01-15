@@ -6,14 +6,14 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/12 09:15:58 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/09 15:56:44 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/15 09:49:34 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 # Use the last version of alpine linux
 FROM alpine:latest
 
-EXPOSE 21 15000
+EXPOSE 21 15000 15001 15002
 
 # ENV PUREFTPD_VERSION=1.0.42-r0 \
 #     SYSLOG_STDOUT_VERSION=1.1.1

@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/20 10:44:46 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/06 17:09:21 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/14 17:24:41 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,12 @@ spec:
   - name: ftps
     port: 21
     targetPort: 21
-  - name: ftps-data
+  - name: ftps-data0
     port: 15000
     targetPort: 15000
+  - name: ftps-data1
+    port: 15001
+    targetPort: 15001
+  - name: ftps-data2
+    port: 15002
+    targetPort: 15002
