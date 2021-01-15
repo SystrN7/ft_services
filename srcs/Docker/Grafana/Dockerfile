@@ -38,19 +38,17 @@ RUN	ln -s /Application/Grafana/bin/grafana-cli /usr/bin && \
 	ln -s /Application/Grafana/bin/grafana-server /usr/bin
 
 # Configure
-# RUN	mv /root/datasources.yaml /Application/Grafana/conf/provisioning/datasources && \
-# 		mv /root/dashboard.yaml /Application/Grafana/conf/provisioning/dashboards && \
-# 		mv /root/dashboard.json /Application/Grafana/conf/provisioning/dashboards
-
+COPY Config/datasources.yaml /Application/Grafana/conf/provisioning/datasources
+COPY Config/dashboard.yaml /Application/Grafana/conf/provisioning/dashboards
+COPY Config/all.json /Application/Grafana/conf/provisioning/dashboards
 
 # USER grafana
-
-# Copy Entrypoint
 
 EXPOSE 3000
 VOLUME	[ "/Application/Grafana/data" ]
 
 WORKDIR /Application/Grafana/
 
+# Copy Entrypoint
 COPY Entrypoint.sh /
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]

@@ -1,0 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    dashboard.yaml                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/15 13:19:46 by fgalaup           #+#    #+#              #
+#    Updated: 2021/01/15 13:27:42 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: 1
+providers:
+- name: dashboards
+  type: file
+  updateIntervalSeconds: 20
+  options:
+    path: /Application/Grafana/conf/provisioning/dashboards
