@@ -3,16 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 10:35:18 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 18:45:03 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/17 15:39:04 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-
 # Use the last version of alpine linux
-FROM alpine:latest
+FROM alpine:3.12
 
 # Exposed port
 EXPOSE 3306
