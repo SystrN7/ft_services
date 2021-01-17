@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 16:29:56 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/17 16:11:53 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ RUN apk update && \
 	apk add --no-cache \
 	nginx \
 	openssl \
-	gcompat \
-	libc6-compat
+	openssh
 # ??? Check if last dependecy is requiered
 
 # Make Application Directory
@@ -51,6 +50,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:1024 \
 	-subj "/C=FT/ST=SERVICE/L=C/O=LA/CN=www.MORT.com" \
 	-keyout /Application/Certs/ssl.key -out /Application/Certs/ssl.crt
 
+# Generating SSH key
+RUN ssh-keygen -A
 
 # Setup site files
 COPY Application/* /Application/tmp

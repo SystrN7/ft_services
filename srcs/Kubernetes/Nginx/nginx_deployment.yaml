@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    nginx_deployment.yaml                              :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:11 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 11:56:35 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/16 10:11:51 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,20 @@ spec:
           containerPort: 443
         - name: http
           containerPort: 80
+        - name: ssh
+          containerPort: 22
+
+        env:
+        - name: SSH_USER
+          valueFrom:
+            secretKeyRef:
+              name: ssh-secret
+              key: username
+        - name: SSH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ssh-secret
+              key: password 
 
         volumeMounts:
           - name: nginx-persistent-volume

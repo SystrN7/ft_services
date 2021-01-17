@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 11:23:19 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/13 18:37:41 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/16 09:55:58 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,21 @@ then
 	echo "Copy To the volume";
 	mv /Application/tmp/* /Application/WWW/;
 fi
+
+# Set default user value
+[ -z "$SSH_USER" ] && SSH_USER=admin
+[ -z "$SSH_PASSWORD" ] && SSH_PASSWORD=admin
+
+# Creating ssh user
+adduser -D "$SSH_USER"
+echo "$SSH_USER:$SSH_PASSWORD" | chpasswd
+
+echo "Login : $SSH_USER\n Password : $SSH_PASSWORD"
+
+# Start SSH Service
+echo "[start] - SSH Deamon"
+/usr/sbin/sshd
+
 
 echo "[Start] - Nginx"
 # Start Nginx

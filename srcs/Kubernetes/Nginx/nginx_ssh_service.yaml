@@ -1,0 +1,31 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    nginx_ssh_service.yaml                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/16 10:03:15 by fgalaup           #+#    #+#              #
+#    Updated: 2021/01/16 10:04:50 by fgalaup          ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
+# Header
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ft-services
+  name: ssh-service
+  labels:
+    app: nginx
+  annotations:
+    metallb.universe.tf/allow-shared-ip: address-pool
+
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+  - name: ssh
+    port: 22
+    targetPort: 22
