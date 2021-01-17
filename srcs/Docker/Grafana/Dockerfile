@@ -40,7 +40,7 @@ RUN	ln -s /Application/Grafana/bin/grafana-cli /usr/bin && \
 # Configure
 COPY Config/datasources.yaml /Application/Grafana/conf/provisioning/datasources
 COPY Config/dashboard.yaml /Application/Grafana/conf/provisioning/dashboards
-COPY Config/all.json /Application/Grafana/conf/provisioning/dashboards
+COPY Config/dashboards /Application/Grafana/conf/provisioning/dashboards
 
 # USER grafana
 

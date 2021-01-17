@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 13:19:49 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/15 13:19:50 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/16 16:51:48 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ datasources:
     # <int> org id. will default to orgId 1 if not specified
     orgId: 1
     # <string> url
-    url: http://svc-influxdb.default.svc.cluster.local:8086
+    url: http://influxdb-service:8086
     # <string> database name, if used
     database: "telegraf"
     # <bool> enable/disable basic auth
