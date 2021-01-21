@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    nginx_deployment.yaml                              :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:11 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/16 10:11:51 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/20 16:31:19 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,3 +66,11 @@ spec:
         volumeMounts:
           - name: nginx-persistent-volume
             mountPath: /Application/WWW
+
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /HealthCheck.sh
+          initialDelaySeconds: 30
+          periodSeconds: 5

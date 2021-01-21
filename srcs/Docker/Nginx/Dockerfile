@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:23:59 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/17 16:16:56 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/20 16:32:41 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ RUN apk update && \
 	apk add --no-cache \
 	nginx \
 	openssl \
-	openssh
+	openssh \
+	procps
+
 # ??? Check if last dependecy is requiered
 
 # Make Application Directory
@@ -55,7 +57,8 @@ RUN ssh-keygen -A
 COPY Application/* /Application/tmp
 
 
-# Copy entrypoint
+# Copy entrypoint & health check
+COPY HealthCheck.sh /HealthCheck.sh
 COPY Entrypoint.sh /Entrypoint.sh
 
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]
