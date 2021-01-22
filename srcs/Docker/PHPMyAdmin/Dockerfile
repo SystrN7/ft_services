@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/07 14:38:34 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/21 15:50:04 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,8 @@ RUN mkdir /Application/PHPMyAdmin/tmp && \
 	chown -R www:www /Application/PHPMyAdmin && \
 	chmod 755 /Application/PHPMyAdmin/config.inc.php 
 
-# Copy entrypoint
+# Copy entrypoint & health check
+COPY HealthCheck.sh /HealthCheck.sh
 COPY Entrypoint.sh /Entrypoint.sh
+
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]

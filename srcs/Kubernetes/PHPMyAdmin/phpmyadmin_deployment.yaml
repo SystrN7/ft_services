@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    phpmyadmin_deployment.yaml                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/16 15:57:04 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 13:57:46 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/21 16:53:52 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,3 +60,11 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: password
+              
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /HealthCheck.sh
+          initialDelaySeconds: 120
+          periodSeconds: 5
