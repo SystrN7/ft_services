@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Entrypoint.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/14 16:15:58 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/22 15:27:40 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,13 +55,18 @@ if [  -n "$WORDPRESS_DATABASE_HOST" ] && [ -n "$WORDPRESS_DATABASE_USER" ] && [ 
 then
 	# Wait MySQL server start
 	counter=0;
-	while [[ mysql --host=${WORDPRESS_DATABASE_HOST} --port=${WORDPRESS_DATABASE_PORT} --user=${WORDPRESS_DATABASE_USER} --password=${WORDPRESS_DATABASE_PASSWORD} -e"quit"] && [counter < 10]]
+	mysql_connection_check='mysql --host=${WORDPRESS_DATABASE_HOST} --port=${WORDPRESS_DATABASE_PORT} --user=${WORDPRESS_DATABASE_USER} --password=${WORDPRESS_DATABASE_PASSWORD} -e "quit"'
+	eval $mysql_connection_check;
+	mysql_status=$?;
+	while [ $mysql_status -ne 0 ] && [ "$counter" -lt "10" ]
 	do
 		echo "Trying to connect to the database : " $counter
-		sleep 5;
-		counter=$((counter+1));
+	 	sleep 5;
+	 	counter=$((counter+1));
+		eval $mysql_connection_check;
+		mysql_satus=$?;
 	done
-	
+
 	# Creating config file if doesn't exit.
 	if [ ! -f /Application/Wordpress/wp-config.php ] ;
 	then
@@ -96,21 +101,21 @@ then
 			--admin_email="$WORDPRESS_ADMIN_EMAIL" \
 			--admin_user="$WORDPRESS_ADMIN_NAME" \
 			--admin_password="$WORDPRESS_ADMIN_PASSWORD"
-		wp option update siteurl "$WORDPRESS_SITE_URL" --path=/Application/Wordpress 
-	fi
+		wp option update siteurl "$WORDPRESS_SITE_URL" --path=/Application/Wordpress
 
-	# Import Users via csv
-	if [ -f /Application/Users.csv ] && [ "$WORDPRESS_USER_IMPORT_CSV"  == "true" ] ;
-	then
-		echo "Importing Users" ;
-		wp user import-csv --path=/Application/Wordpress --skip-update /Application/Users.csv
-	fi
-
-	# Creating Random Users
-	if [ "$WORDPRESS_USER_RANDOM" -ge 1 ] ;
-	then
-		echo "Generating Users" ;
-		wp user generate --path=/Application/Wordpress --count=$WORDPRESS_USER_RANDOM
+		# Import Users via csv
+		if [ -f /Application/Users.csv ] && [ "$WORDPRESS_USER_IMPORT_CSV"  == "true" ] ;
+		then
+			echo "Importing Users" ;
+			wp user import-csv --path=/Application/Wordpress --skip-update /Application/Users.csv
+		fi
+		
+		# Creating Random Users
+		if [ "$WORDPRESS_USER_RANDOM" -ge 1 ] ;
+		then
+			echo "Generating Users" ;
+			wp user generate --path=/Application/Wordpress --count=$WORDPRESS_USER_RANDOM
+		fi
 	fi
 fi
 

@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/23 14:43:30 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/10 15:35:12 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/22 15:26:37 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,16 @@ if [  -n "$PMA_HOST" ] && [ -n "$PMA_USER" ] ;
 then
 	# Wait MySQL server start
 	counter=0;
-	while [ ["mysql --host=${PMA_HOST} --port=${PMA_PORT} --user=${PMA_USER} --password=${PMA_PASSWORD} -e\"quit\""] && [counter < 10]]
+	mysql_connection_check='mysql --host=${PMA_HOST} --port=${PMA_PORT} --user=${PMA_USER} --password=${PMA_PASSWORD} -e "quit"'
+	eval $mysql_connection_check;
+	mysql_status=$?;
+	while [ $mysql_status -ne 0 ] && [ "$counter" -lt "10" ]
 	do
-		echo "Trying to connect to the database : $counter"
-		sleep 5;
-		counter=$((counter+1));
+		echo "Trying to connect to the database : " $counter
+	 	sleep 5;
+	 	counter=$((counter+1));
+		eval $mysql_connection_check;
+		mysql_satus=$?;
 	done
 
 	# Install PHPMyAdmin Database (only if the database does not exist).
