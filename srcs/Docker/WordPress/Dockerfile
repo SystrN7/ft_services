@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/21 17:05:09 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/22 10:36:34 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ RUN wget https://fr.wordpress.org/latest-fr_FR.tar.gz && \
 	rm -f latest-fr_FR.tar.gz && \
 	mv wordpress /Application/tmp && \
 	chown -R www:www /Application/tmp && \
-	chmod -R 744 /Application/tmp
+	chmod -R 764 /Application/tmp
 
 
 # Configure Nginx
@@ -78,7 +78,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 COPY Config/User.csv /Application/Users.csv
 
-USER www
+# USER www
 
 # Copy entrypoint & health check
 COPY HealthCheck.sh /HealthCheck.sh
