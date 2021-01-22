@@ -6,7 +6,7 @@
 #    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 12:31:39 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/14 16:26:56 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/21 17:05:09 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,11 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 	chmod +x /bin/wp
 
 COPY Config/User.csv /Application/Users.csv
-	
-# Copy entrypoint
+
+USER www
+
+# Copy entrypoint & health check
+COPY HealthCheck.sh /HealthCheck.sh
 COPY Entrypoint.sh /Entrypoint.sh
+
 ENTRYPOINT [ "sh", "/Entrypoint.sh" ]

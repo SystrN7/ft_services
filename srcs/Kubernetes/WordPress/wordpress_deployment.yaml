@@ -6,7 +6,7 @@
 #    By: felix <felix@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/05 18:50:13 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/12 11:58:36 by felix            ###   ########lyon.fr    #
+#    Updated: 2021/01/21 16:53:45 by felix            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,3 +93,11 @@ spec:
         # Other Config
         - name: WORDPRESS_SITE_URL
           value: http://192.168.99.100:5050
+
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /HealthCheck.sh
+          initialDelaySeconds: 120
+          periodSeconds: 5
