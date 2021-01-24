@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/12 09:15:58 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/17 15:39:55 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/17 16:30:55 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,9 @@ RUN apk update && \
 # COPY Config/Cert/pure-ftpd-dhparams.pem /etc/ssl/private/
 # COPY Config/Cert/pure-ftpd.pem /etc/ssl/private/
 # RUN chmod 600 /etc/ssl/private/*.pem
+
+# Configure
+COPY Config/pure-ftpd.conf /etc/pure-ftpd.conf
 
 # Copy entrypoint
 COPY Entrypoint.sh /
