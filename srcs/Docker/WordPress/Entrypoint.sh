@@ -6,7 +6,7 @@
 #    By: fgalaup <fgalaup@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 11:47:54 by fgalaup           #+#    #+#              #
-#    Updated: 2021/01/22 15:27:40 by fgalaup          ###   ########lyon.fr    #
+#    Updated: 2021/01/23 10:09:15 by fgalaup          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ then
 	echo "Copy To the volume";
 	mv /Application/tmp/wordpress/* /Application/Wordpress;
 	rm -R /Application/tmp;
+	chown -R www:www /Application/Wordpress
+	chmod -R 777 /Application/Wordpress
 fi
 
 # Creating configuration file and database
